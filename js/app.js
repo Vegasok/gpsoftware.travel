@@ -41,10 +41,7 @@
 		var url = 'http://api.fixer.io/latest';
 
 		this.http = function(url){
-			return $http({
-				method: 'GET',
-				url: url
-			}).then(function(response){
+			return $http.get(url).then(function(response){
 				return response.data;
 			}, function(error) {
 				return error;
