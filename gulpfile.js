@@ -63,7 +63,6 @@ gulp.task('build', function(){
     runSequence(['js', 'html'], 'index');    
 });
 
-
 gulp.task('test', function (done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
