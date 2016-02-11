@@ -1,0 +1,24 @@
+{
+  "name": "gpsoftwaretravel",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Vegasok <lamps23@mail.ru>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Vegasok/gpsoftware.travel",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.*",
+    "angular-route": "1.2.6",
+    "underscore": "*"
+  }
+}

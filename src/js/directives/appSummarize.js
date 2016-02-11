@@ -6,7 +6,7 @@ app.directive('pkSum', function(){
             second: '='
 		},
 		
-		templateUrl: 'js/directives/appSummarize.html'
+		template: "<p>Sum of two Numbers:<input type='text' ng-value='first + second' disabled/></p>"
 		
 	};
 });
