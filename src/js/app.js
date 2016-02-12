@@ -2,35 +2,36 @@ var app = angular.module('app', ['ngRoute']);
 	
 app.config(function ($routeProvider){
 	$routeProvider
-		.when('/', {
-			templateUrl: 'views/sum.html'
+		.when('/summarize', {
+			template: '<pk-sum></pk-sum>',
+			controller: 'AppCtrl'
 		})
-		.when('/:firstNumber/:secondNumber',{
-			templateUrl: 'views/route.html',
+		.when('/summarize/:firstNumber/plus/:secondNumber',{
+			template: '<pk-sum></pk-sum>',
 			controller: 'AppCtrl'
 			
 		})
 		.otherwise({
-			redirectTo: '/'
+			redirectTo: '/summarize'
 		});
-});
+}); 
+
 app.controller('AppCtrl', function($scope, $routeParams, $location) {
 
-	$scope.firstNumber = parseInt($routeParams.firstNumber);
-	$scope.secondNumber = parseInt($routeParams.secondNumber);   		
+	$scope.firstNumber = parseInt($routeParams.firstNumber) || 0;
+	$scope.secondNumber = parseInt($routeParams.secondNumber) || 0;  
 
-	function createPath(separator) {
-        separator = separator || '/';
+	$scope.$watch('firstNumber', function(newValue, oldValue) {   
+	    if (newValue !== oldValue) {	     
+	      $location.path('/summarize/' + $scope.firstNumber + '/plus/' + $scope.secondNumber);
+	    }
+ 	 });
 
-        return separator + $scope.firstNumber + separator + $scope.secondNumber;
-    };
-
-    function changeURL(path) {
-        $location.url(path);
-    }
-
-        $scope.changeURL = _.compose(changeURL, createPath);   		
-		
+	 $scope.$watch('secondNumber', function(newValue, oldValue) {	  
+	    if (newValue !== oldValue) {	      
+	      $location.path('/summarize/' + $scope.firstNumber + '/plus/' + $scope.secondNumber);
+	    }
+	  }); 		
 });
 
 app.service('currency', function($http){
@@ -54,5 +55,7 @@ app.controller('ConvertCurrency', function($scope, currency){
 
 	currency.getCurrencies().then(function(data) {
 		$scope.getCurrencies = data.rates;
+		$scope.selectedCurrency = $scope.getCurrencies['CAD'];
+
 	});
 });

@@ -1,12 +1,10 @@
 <h3>Sum of two Numbers</h3>
 <p>First Number:
-	<input type="number" ng-model="firstNumber" placeholder="enter number"/>
+	<input type="number" ng-model="firstNumber" placeholder="enter number" ng-model-options="{ debounce: 1000 }"/>
 </p>
 <p>Second Number:
-	<input type="number" ng-model="secondNumber" placeholder="enter number"/>
+	<input type="number" ng-model="secondNumber" placeholder="enter number" ng-model-options="{ debounce: 1000 }"/>
 </p>
-
-<pk-sum  first="firstNumber" second="secondNumber"></pk-sum>
 
 <div ng-controller="ConvertCurrency">
 	<select ng-model = "selectedCurrency" ng-options="v as k for (k, v) in getCurrencies"></select>

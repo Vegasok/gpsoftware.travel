@@ -1,12 +1,14 @@
 app.directive('pkSum', function(){
 	return {
+
+		link: function(scope, element, attributes) {
+	     scope.$watch('firstNumber + secondNumber', function(newValue){
+	        scope.result = parseInt(scope.firstNumber) + parseInt(scope.secondNumber);
+	      });
+	 	},
 		restrict: 'E',
-		scope:{
-			first: '=',
-            second: '='
-		},
-		
-		template: "<p>Sum of two Numbers:<input type='text' ng-value='first + second' disabled/></p>"
+			
+		templateUrl: 'src/js/directives/sum.directive.html'
 		
 	};
 });

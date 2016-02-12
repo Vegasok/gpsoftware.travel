@@ -22,7 +22,7 @@ var config = {
 };
 
 gulp.task('js', function () {
-   gulp.src('./src/js/**/*.js')
+    gulp.src('./src/js/**/*.js')
    .pipe(concat('app.min.js'))
    .pipe(ngAnnotate())
    .pipe(uglify())
@@ -30,15 +30,15 @@ gulp.task('js', function () {
 });
    
 gulp.task('index', function () {
-  gulp.src('./src/index.html')
-  .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
-  .pipe(inject(gulp.src('../build/js/*.js', {read: false})))
-  .pipe(gulp.dest('./build/'));
+     gulp.src('./src/index.html')
+    .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'}))
+    .pipe(inject(gulp.src('../build/js/*.js', {read: false})))
+    .pipe(gulp.dest('./build/'));
 });
 
 gulp.task('html', function () {
-        gulp.src('./src/views/*.html')
-        .pipe(gulp.dest('build/views'));
+    gulp.src('./src/views/*.html')
+    .pipe(gulp.dest('build/views'));
 });
 
 gulp.task('src', function() {
@@ -60,7 +60,7 @@ gulp.task('webserver', function () {
 });
 
 gulp.task('build', function(){
-    runSequence(['js', 'html'], 'index');    
+    runSequence('js', 'html', 'index');    
 });
 
 gulp.task('test', function (done) {
