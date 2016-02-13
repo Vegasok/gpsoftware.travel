@@ -16,46 +16,50 @@ app.config(function ($routeProvider){
 		});
 }); 
 
-app.controller('AppCtrl', function($scope, $routeParams, $location) {
+app.controller('AppCtrl', function($scope, currency, $routeParams, $location) {
 
 	$scope.firstNumber = parseInt($routeParams.firstNumber) || 0;
 	$scope.secondNumber = parseInt($routeParams.secondNumber) || 0;  
 
-	$scope.$watch('firstNumber', function(newValue, oldValue) {   
-	    if (newValue !== oldValue) {	     
-	      $location.path('/summarize/' + $scope.firstNumber + '/plus/' + $scope.secondNumber);
-	    }
- 	 });
+	$scope.$watch('firstNumber', function(newValue, oldValue) { 	        
+      	$location.path('/summarize/' + $scope.firstNumber + '/plus/' + $scope.secondNumber);	    
+	});
 
-	 $scope.$watch('secondNumber', function(newValue, oldValue) {	  
-	    if (newValue !== oldValue) {	      
-	      $location.path('/summarize/' + $scope.firstNumber + '/plus/' + $scope.secondNumber);
-	    }
-	  }); 		
+	$scope.$watch('secondNumber', function(newValue, oldValue) {	      
+	  	$location.path('/summarize/' + $scope.firstNumber + '/plus/' + $scope.secondNumber);
+	}); 	
+	
 });
 
 app.service('currency', function($http){
 
-	var url = 'http://api.fixer.io/latest';
+	var url = 'http://api.fixer.io/latest';	
 
-	this.http = function(url){
-		return $http.get(url).then(function(response){
-			return response.data;
-		}, function(error) {
-			return error;
-		});
-	};
+		this.http = function(url){
+			return $http.get(url).then(function(response){
+				return response.data;
+			}, function(error) {
+				return error;
+			});
+		};		
 
 	this.getCurrencies = function(){
-		return this.http(url);
+
+			return this.http(url);				
 	}
 });	
 
 app.controller('ConvertCurrency', function($scope, currency){
-
-	currency.getCurrencies().then(function(data) {
-		$scope.getCurrencies = data.rates;
-		$scope.selectedCurrency = $scope.getCurrencies['CAD'];
-
+  currency.getCurrencies().then(function(data) {
+		$scope.data = data;
+		$scope.convertedCurrency = $scope.data.rates['CAD'] * $scope.result;
+		$scope.selectCurrency = $scope.data.rates;		
+		$scope.selectedCurrency = $scope.selectCurrency['CAD'];
+		
+	});		
+	
+	$scope.$watch('result + selectedCurrency', function() {
+		$scope.convertedCurrency = ($scope.data ? $scope.selectedCurrency : 1) * $scope.result;
 	});
+
 });

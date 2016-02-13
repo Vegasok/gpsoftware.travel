@@ -19,6 +19,7 @@
   "dependencies": {
     "angular": "1.5.*",
     "angular-route": "1.2.6",
-    "underscore": "*"
+    "underscore": "*",
+    "angular-ui-router": "~0.2.18"
   }
 }

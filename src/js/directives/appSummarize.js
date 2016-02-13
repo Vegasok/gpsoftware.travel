@@ -1,8 +1,8 @@
 app.directive('pkSum', function(){
 	return {
 
-		link: function(scope, element, attributes) {
-	     scope.$watch('firstNumber + secondNumber', function(newValue){
+		link: function(scope) {
+	     scope.$watch('firstNumber + secondNumber', function(){
 	        scope.result = parseInt(scope.firstNumber) + parseInt(scope.secondNumber);
 	      });
 	 	},
